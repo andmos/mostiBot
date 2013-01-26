@@ -19,16 +19,25 @@ import java.io.ObjectOutputStream;
 public class mostiBot extends PircBot {
     
     ArrayList<String> noList = new ArrayList<String>();
+    ArrayList<String> options = new ArrayList<String>(); 
     
     public mostiBot(){
         this.setName("mostiBot");
+        options.add("time");
     }
     
     public void onMessage(String channel, String sender, String login, String hostname, String message) {
-        
+            
            if (message.equalsIgnoreCase("time")) {
             String time = new java.util.Date().toString();
+            
             sendMessage(channel, sender + ": The time is now " + time);
+        }if (message.equalsIgnoreCase("help")){
+            String ut = " "; 
+            for (int i = 0; i <options.size(); i++) {
+                ut += options.get(i) + " "; 
+            }
+            sendMessage(channel, sender + " The options are:" + ut); 
         }
     
     }
