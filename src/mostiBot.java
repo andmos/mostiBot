@@ -38,7 +38,16 @@ public class mostiBot extends PircBot {
                 ut += options.get(i) + " "; 
             }
             sendMessage(channel, sender + " The options are:" + ut); 
-        }
-    
+        }if(message.equalsIgnoreCase("users")) {
+            User[] users = new User[getUsers(channel).length]; 
+                users = getUsers(channel); 
+                String ut = ""; 
+                for (int i = 0; i < users.length; i++) {
+                    ut += users[i].getNick(); 
+         }
+                sendMessage(channel, sender + ": users: " + ut); 
+         }
+       }
+        
+        
     }
-}
