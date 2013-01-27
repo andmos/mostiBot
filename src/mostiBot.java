@@ -10,13 +10,7 @@
 import org.jibble.pircbot.*;
 import java.util.ArrayList; 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 
 
@@ -93,20 +87,15 @@ public class mostiBot extends PircBot {
 			int i = 0;	
                         try {
 				Process proc = Runtime.getRuntime().exec(cmd);
-				BufferedReader read = new BufferedReader(new InputStreamReader(
-						proc.getInputStream()));
-				
-				
+				BufferedReader read = new BufferedReader(new InputStreamReader(proc.getInputStream()));
 				out[i] = read.readLine();
 				while (read.ready()&&i<9) {
-					
-				out[i] = read.readLine();
-				i++;
+                                    out[i] = read.readLine();
+                                    i++;
 				}
 
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
-				
 			} 
 
 
