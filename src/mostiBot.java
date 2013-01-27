@@ -30,15 +30,17 @@ public class mostiBot extends PircBot {
         options.add("!time");
         options.add("!users"); 
         options.add("!uptime");
+        options.add("!next");
     }
     
+    @Override
     public void onMessage(String channel, String sender, String login, String hostname, String message) {
             
            if (message.equalsIgnoreCase("!time")) {
             String time = new java.util.Date().toString();
             
             sendMessage(channel, sender + ": The time is now " + time);
-        }if (message.equalsIgnoreCase("help")){
+        }if (message.equalsIgnoreCase("!help")){
             String ut = " "; 
             for (int i = 0; i <options.size(); i++) {
                 ut += options.get(i) + " "; 
@@ -65,6 +67,9 @@ public class mostiBot extends PircBot {
                  System.out.println(e.getMessage());
                  sendMessage(channel, e.getMessage()); 
              }
+         }if(message.equalsIgnoreCase("!next")){
+           Timeplan plan = new Timeplan(); 
+           sendMessage(channel, plan.getNextLecture()); 
          }
        }
     
