@@ -3,8 +3,6 @@
  * @author andreasmosti
  * 
  * Try to keep the code dynamic, NO HARD CODING HERE 
-
-
 */
 
 import org.jibble.pircbot.*;
@@ -55,22 +53,19 @@ public class mostiBot extends PircBot {
              try{
                  String host = getHostName(); 
                  String uptime = "";
-                 uptime = getBash("uptime")[0];
+                 uptime = getBashCommandOutput("uptime")[0];
                  sendMessage(channel, "Uptime for " + getHostName() + ": " +uptime); 
              }catch(Exception e) { 
                  System.out.println(e.getMessage());
                  sendMessage(channel, e.getMessage()); 
              }
-         }if(message.equalsIgnoreCase("!next")){
-           Timeplan plan = new Timeplan(); 
-           sendMessage(channel, plan.getNextLecture()); 
          }
        }
     
     public String getHostName(){
         String host = ""; 
         try{
-            host = getBash("hostname")[0]; 
+            host = getBashCommandOutput("hostname")[0]; 
             return host; 
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -78,10 +73,8 @@ public class mostiBot extends PircBot {
         }
         return host; 
     }	
-        
-    
-    
-    public String[] getBash(String command) {
+
+    public String[] getBashCommandOutput(String command) {
 			String[] cmd = {"/bin/sh","-c",command};
 			String[] out = new String[10];
 			int i = 0;	
@@ -101,11 +94,6 @@ public class mostiBot extends PircBot {
 
 			return out;
 		}
-		
-	
 	}
-       
-    
-    
     
  
