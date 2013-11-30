@@ -39,16 +39,16 @@ public class mostiBot extends PircBot {
                 ut += options.get(i) + " "; 
             }
             sendMessage(channel, sender + " The options are:" + ut); 
-        }
+           }
            if(message.equalsIgnoreCase("!users")) {
             User[] users = new User[getUsers(channel).length]; 
                 users = getUsers(channel); 
                 String ut = ""; 
                 for (int i = 0; i < users.length; i++) {
                     ut += users[i].getNick() + " "; 
-         }
+                }
                 sendMessage(channel, sender + ": users: " + ut); 
-         }
+           }
            if(message.equalsIgnoreCase("!quit") && sender.equalsIgnoreCase("mosti")){
              quitServer(sender + " killed me!"); 
          
@@ -56,10 +56,10 @@ public class mostiBot extends PircBot {
            if(message.equalsIgnoreCase("!uptime")){
              try{
                  String host = getHostName(); 
-                 String uptime = "";
-                 uptime = getBashCommandOutput("uptime")[0];
-                 sendMessage(channel, "Uptime for " + host + ": " +uptime); 
-             }catch(Exception e) { 
+                 
+                 String uptime = getBashCommandOutput("uptime")[0];
+                 sendMessage(channel, "Uptime for " + host + ": " + uptime); 
+                }catch(Exception e) { 
                  System.out.println(e.getMessage());
                  sendMessage(channel, e.getMessage()); 
              }
@@ -68,21 +68,21 @@ public class mostiBot extends PircBot {
                  java.util.Random ran = new java.util.Random(); 
                  sendMessage(channel, greetings.get(ran.nextInt(greetings.size()))); 
                  
-             }catch(Exception e) {
+                }catch(Exception e) {
                  System.out.println(e.getMessage());
                  sendMessage(channel, e.getMessage()); 
              }
          }
        }
     
-    public void addGreetingsToList(ArrayList listToAddTo){
+    private void addGreetingsToList(ArrayList listToAddTo){
         listToAddTo.add("Hello!");
         listToAddTo.add("Morn du!");
         listToAddTo.add("Hur går det?");
         listToAddTo.add("Have a nice one!");
     }
     
-    public String getHostName(){
+    private String getHostName(){
         String host = ""; 
         try{
             host = getBashCommandOutput("hostname")[0]; 
@@ -94,7 +94,7 @@ public class mostiBot extends PircBot {
         return host; 
     }	
 
-    public String[] getBashCommandOutput(String command) {
+    private String[] getBashCommandOutput(String command) {
 			String[] cmd = {"/bin/sh","-c",command};
 			String[] out = new String[10];
 			int i = 0;	
