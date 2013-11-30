@@ -10,12 +10,11 @@ import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-
-
 public class mostiBot extends PircBot {
     
-    ArrayList<String> noList = new ArrayList<String>();
-    ArrayList<String> options = new ArrayList<String>(); 
+    private ArrayList<String> noList = new ArrayList<String>();
+    private ArrayList<String> options = new ArrayList<String>(); 
+    private ArrayList<String> greetings = new ArrayList<String>(); 
     
     public mostiBot(){
         this.setName("mostiBot");
@@ -23,6 +22,8 @@ public class mostiBot extends PircBot {
         options.add("!users"); 
         options.add("!uptime");
         options.add("!next");
+        options.add("!hei"); 
+        addGreetingsToList(greetings); 
     }
     
     @Override
@@ -30,15 +31,16 @@ public class mostiBot extends PircBot {
             
            if (message.equalsIgnoreCase("!time")) {
             String time = new java.util.Date().toString();
-            
             sendMessage(channel, sender + ": The time is now " + time);
-        }if (message.equalsIgnoreCase("!help")){
+        }
+           if (message.equalsIgnoreCase("!help")){
             String ut = " "; 
             for (int i = 0; i <options.size(); i++) {
                 ut += options.get(i) + " "; 
             }
             sendMessage(channel, sender + " The options are:" + ut); 
-        }if(message.equalsIgnoreCase("!users")) {
+        }
+           if(message.equalsIgnoreCase("!users")) {
             User[] users = new User[getUsers(channel).length]; 
                 users = getUsers(channel); 
                 String ut = ""; 
@@ -46,21 +48,39 @@ public class mostiBot extends PircBot {
                     ut += users[i].getNick() + " "; 
          }
                 sendMessage(channel, sender + ": users: " + ut); 
-         }if(message.equalsIgnoreCase("!quit") && sender.equalsIgnoreCase("mosti")){
+         }
+           if(message.equalsIgnoreCase("!quit") && sender.equalsIgnoreCase("mosti")){
              quitServer(sender + " killed me!"); 
          
-         }if(message.equalsIgnoreCase("!uptime")){
+         }
+           if(message.equalsIgnoreCase("!uptime")){
              try{
                  String host = getHostName(); 
                  String uptime = "";
                  uptime = getBashCommandOutput("uptime")[0];
-                 sendMessage(channel, "Uptime for " + getHostName() + ": " +uptime); 
+                 sendMessage(channel, "Uptime for " + host + ": " +uptime); 
              }catch(Exception e) { 
+                 System.out.println(e.getMessage());
+                 sendMessage(channel, e.getMessage()); 
+             }
+         }if(message.equalsIgnoreCase("!hello")){
+             try{ 
+                 java.util.Random ran = new java.util.Random(); 
+                 sendMessage(channel, greetings.get(ran.nextInt(greetings.size()))); 
+                 
+             }catch(Exception e) {
                  System.out.println(e.getMessage());
                  sendMessage(channel, e.getMessage()); 
              }
          }
        }
+    
+    public void addGreetingsToList(ArrayList listToAddTo){
+        listToAddTo.add("Hello!");
+        listToAddTo.add("Morn du!");
+        listToAddTo.add("Hur går det?");
+        listToAddTo.add("Have a nice one!");
+    }
     
     public String getHostName(){
         String host = ""; 
@@ -90,8 +110,7 @@ public class mostiBot extends PircBot {
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			} 
-
-
+                        
 			return out;
 		}
 	}

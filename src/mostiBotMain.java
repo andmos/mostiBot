@@ -13,8 +13,8 @@ public class mostiBotMain {
         mostiBot bot = new mostiBot(); 
         
         bot.setVerbose(true);
-        bot.connect("irc.homelien.no");
-        bot.joinChannel("#homsenett");
+        bot.connect("irc.freenode.org");
+        bot.joinChannel("#hyggenett");
         
         
     }
